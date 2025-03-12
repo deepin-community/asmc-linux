@@ -1,0 +1,4 @@
+# -*- mode: conf -*-
+
+# asmc is build by assembler
+asmc-linux: hardening-no-fortify-functions [usr/bin/asmc]
