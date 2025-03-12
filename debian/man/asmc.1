@@ -1,0 +1,338 @@
+.\"
+.TH ASMC "1" "January 2025" "Asmc Macro Assembler" "User Commands"
+.SH NAME
+asmc \- Asmc Macro Assembler
+.SH SYNOPSIS
+.SY asmc
+[\fI\,options\fR] \fI\,filename\fR
+[ [\fI\,options\fR] \fI\,filename\fR] ... [\-link \fI\,link_options\fR]
+.YS
+.SH DESCRIPTION
+Asmc Macro Assembler
+.SH OPTIONS
+.TP
+\fB\-\fR{0|1|..|10}[p]
+Set CPU: 0=8086 (default), 1=80186, 2=80286, 3=80386, 4=80486,
+5=Pentium,6=PPro,7=P2,8=P3,9=P4,10=x86\-64.
+"p" allows privileged instructions.
+.TP
+\fB\-arch:\fI\,option\fR
+Specifies the architecture for code generation. Valid \fI\,option\fR\,s
+are: IA32, SSE, SSE2, AVX, AVX2, and AVX512.
+.TP
+\fB\-assert\fR
+Generate .assert code.
+.TP
+\fB\-autostack\fR
+Calculate required stack space for arguments.
+.TP
+\fB\-bin\fR
+Generate plain binary file.
+.TP
+\fB\-Bl\fI\,filename\fR
+Selects an alternate linker in \fI\,filename\fR
+.TP
+\fB\-c\fR
+Assembles only. Does no linking.
+.TP
+\fB\-Cs\fR
+Push user registers before stack-frame is created in a proc.
+.TP
+\fB\-coff\fR
+Generate COFF format object file.
+.TP
+\fB\-C\fR{p|u|x}
+Set OPTION CASEMAP.
+.RS
+.TP
+\fB\-Cp\fR
+Preserves case of all user identifiers.
+.TP
+\fB\-Cu\fR
+Maps all identifiers to upper case (default).
+.TP
+\fB\-Cx\fR
+Preserves case in public and extern symbols.
+.RE
+.TP
+\fB\-D\fI\,symbol\fR[=\fI\,value\fR]
+Defines a text macro with the given name. If \fI\,value\fR is missing, it is blank.
+Multiple tokens separated by spaces must be enclosed in quotation marks.
+.TP
+\fB\-dotname\fR
+Allows names of identifiers to begin with a period.
+.TP
+\fB\-e\fI\,number\fR
+Set error limit to \fI\,number\fR.
+.TP
+\fB\-elf\fR[64]
+Generate ELF object file.
+.RS
+.TP
+\fB\-elf\fR
+Generate 32-bit ELF object file.
+.TP
+\fB\-elf64\fR
+Generate 64-bit ELF object file.
+.RE
+.TP
+\fB\-endbr\fR
+Insert ENDBR at function entry.
+.TP
+\fB\-EP\fR
+Generates a preprocessed source listing (sent to STDOUT). See \fB\-Sf\fR.
+.TP
+\fB\-eq\fR
+Don't display error messages.
+.TP
+\fB\-Fd\fR[\fI\,file\fR]
+Write import definition file.
+.TP
+\fB\-Fi\fI\,file\fR
+Force \fI\,file\fR to be included.
+.TP
+\fB\-Fl\fR[\fI\,filename\fR]
+Generates an assembled code listing. See \fB\-Sf\fR.
+.TP
+\fB\-Fo\fI\,filename\fR
+Names an object file. In case of wildcard '*' may be used for current file.
+.TP
+\fB\-fpc\fR
+Disallow floating\-point instructions.
+.TP
+\fB\-FPi\fR
+Generates emulator fix-ups for floating-point arithmetic (mixed language only).
+.TP
+\fB\-FPi87\fR
+80x87 instructions (default).
+.TP
+\fB\-fpic\fR, \fB\-fno\-pic\fR
+Enables or disables the generation of position-independent code for ELF64.
+Default is \fB\-fno\-pic\fR.
+.TP
+\fB\-fp\fI\,n\fR
+Set FPU as \fI\,n\fR: 0=8087, 2=80287, 3=80387.
+.TP
+\fB\-frame\fR
+Auto generate unwind information.
+.TP
+\fB\-Fw\fI\,filename\fR
+Set errors file name.
+.TP
+\fB\-G\fR{c|d|z|v|s}
+Pascal, C, Std/Vector/Sys\-call.
+.RS
+.TP
+\fB\-Gc\fR
+Specifies use of FORTRAN\-style or Pascal\-style function calling and naming conventions.
+.TP
+\fB\-Gd\fR
+Specifies use of C\-style function calling and naming conventions.
+.TP
+\fB\-Gz\fR
+Specifies use of STDCALL\-style function calling and naming conventions.
+Defines STDCALLSUPPORTED.
+.TP
+\fB\-Gv\fR
+Specifies use of VECTORCALL\-style function calling and naming conventions.
+.TP
+\fB\-Gs\fR
+Specifies use of SYSCALL (System V)\-style function calling and naming conventions.
+.RE
+.TP
+\fB\-Ge\fR
+Emit a conditional _chkstk() inside the prologue.
+.TP
+\fB\-help\fR
+Displays a summary of Asmc command\-line syntax and options.
+.TP
+\fB\-homeparams\fR
+Forces parameters passed in registers to be written to their locations
+on the stack upon function entry.
+.TP
+\fB\-I\fI\,pathname\fR
+Sets \fI\,pathname\fR for include file.
+.TP
+\fB\-idd\fR[t]
+Assemble as binary data [or text].
+.RS
+.TP
+\fB\-idd\fR
+Assemble source as binary data.
+.TP
+\fB\-iddt\fR
+Assemble source as text file.
+.RE
+.TP
+\fB\-logo\fR
+Print logo string and exit.
+.TP
+\fB\-m\fR{t|s|c|m|l|h|f}
+Set memory model.
+.TP
+\fB\-mz\fR
+Generate DOS MZ binary file.
+.TP
+\fB\-MD\fR[d]
+Use for dynamic linking.
+Defines _MSVCRT.
+Also defines _DEBUG if "d" is added.
+.TP
+\fB\-MT\fR[d]
+Use for static linking.
+Defines _MT.
+Also defines _DEBUG if "d" is added.
+.TP
+\fB\-nc\fI\,name\fR
+Set class name of code segment as \fI\,name\fR.
+.TP
+\fB\-nd\fI\,name\fR
+Set name of data segment as \fI\,name\fR.
+.TP
+\fB\-nm\fI\,name\fR
+Set name of module as \fI\,name\fR.
+.TP
+\fB\-nt\fI\,name\fR
+Set name of text segment as \fI\,name\fR.
+.TP
+\fB\-nolib\fR
+Ignore INCLUDELIB directive.
+.TP
+\fB\-pe\fR{c|g|d}
+Generate PE binary file, 32/64\-bit.
+c=CUI(default), g=GUI, d=DLL.
+.TP
+\fB\-q\fR
+Suppresses messages for successful assembly.
+.TP
+\fB\-nologo\fR
+Suppress copyright message.
+.TP
+\fB\-r\fR
+Recurse subdirectories with use of wildcards.
+.TP
+\fB\-Sa\fR
+Turns on listing of all available information.
+.TP
+\fB\-safeseh\fR
+Marks the object as either containing no exception handlers or containing
+exception handlers that are all declared with SAFESEH.
+.TP
+\fB\-Sf\fR
+Adds first-pass listing to listing file.
+.TP
+\fB\-Sg\fR
+Turns on listing of assembly\-generated code.
+.TP
+\fB\-Sn\fR
+Turns off symbol table when producing a listing.
+.TP
+\fB\-Sp\fI\,n\fR
+Set segment alignment as \fI\,n\fR.
+.TP
+\fB\-stackalign\fR
+Align stack variables to 16-byte.
+.TP
+\fB\-sysvregs\fR
+Ignore RDI and RSI in USES for Linux64.
+.TP
+\fB\-Sx\fR
+Turns on false conditionals in listing.
+.TP
+\fB\-w\fR
+Same as \fB\-W0\fR \fB\-WX\fR.
+.TP
+\fB\-W\fI\,level\fR
+Sets the warning level, where level = 0, 1, 2, or 3.
+.TP
+\fB\-win64\fR
+Generate 64\-bit COFF object. Defines _WIN64.
+.TP
+\fB\-ws\fI\,CodePage\fR
+Store quoted \fI\,CodePage\fR as Unicode. Defines _UNICODE.
+.TP
+\fB\-WX\fR
+Treat all warnings as errors.
+.TP
+\fB\-X\fR
+Ignore INCLUDE environment path.
+.TP
+\fB\-Z7\fR
+Add full symbolic debugging information.
+.TP
+\fB\-zcw\fR
+No decoration for C symbols.
+.TP
+\fB\-Zd\fR
+Generates line-number information in object file.
+.TP
+\fB\-Zf\fR
+Make all symbols public.
+.TP
+\fB\-zf\fR{0|1}
+Set FASTCALL type: MS/OW.
+.TP
+\fB\-Zg\fR
+Generate code to match Masm.
+.TP
+\fB\-Zi\fR{0|1|2|3}{|5|8}
+Add symbolic debugging information.
+.TP
+\fB\-zlc\fR
+No OMF records of data in code.
+.TP
+\fB\-zld\fR
+No OMF records of far call.
+.TP
+\fB\-Zm\fR
+Enable MASM 5.10 compatibility.
+.TP
+\fB\-Zv8\fR
+Enable Masm v8+ PROC visibility.
+.TP
+\fB\-Zne\fR
+Disable syntax extensions not supported and enable syntax supported by Masm.
+.TP
+\fB\-zl\fR{f|p|s}
+Suppress items in COFF
+.RS
+.TP
+\fB\-zlf\fR
+Suppress items in COFF: No file entry.
+.TP
+\fB\-zlp\fR
+Suppress items in COFF: No static procs.
+.TP
+\fB\-zls\fR
+Suppress items in COFF: No section aux entry.
+.RE
+.TP
+\fB\-Zp\fR[\fI\,alignment\fR]
+Packs structures of the specified byte boundary by \fI\,alignment\fR.
+.TP
+\fB\-Zs\fR
+Perform syntax check only.
+.TP
+\fB\-zt\fR{0|1|2}
+Set STDCALL decoration: FULL (default), NONE, and HALF.
+.TP
+\fB\-zze\fR
+No export symbol decoration.
+.TP
+\fB\-zzs\fR
+Store name of start address.
+.SH COPYRIGHT
+Copyright (C) 2011\-2025 The Asmc Contributors.
+.SH "SEE ALSO"
+.TP
+Online manual
+.UR https://github.com/nidud/asmc/blob/master/readme.md
+.UE
+.TP
+asmc_linux
+.UR https://github.com/nidud/asmc_linux
+.UE
+.TP
+asmc
+.UR https://github.com/nidud/asmc
+.UE

@@ -1,5 +1,45 @@
-template-repository (1.0-1) unstable; urgency=medium
+asmc-linux (0.0~git20250222.986c68a+ds-2) unstable; urgency=medium
 
-  * Initial release
+  * Upgrade Debian policy to 4.7.2
+  * Update description text format
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- YOKOTA Hiroshi <yokota.hgml@gmail.com>  Sat, 01 Mar 2025 21:44:18 +0900
+
+asmc-linux (0.0~git20250222.986c68a+ds-1) unstable; urgency=medium
+
+  * New upstream version 0.0~git20250222.986c68a+ds
+  * Rediff patches
+
+ -- YOKOTA Hiroshi <yokota.hgml@gmail.com>  Sun, 23 Feb 2025 04:13:00 +0900
+
+asmc-linux (0.0~git20250222.34a9a0b+ds-1) unstable; urgency=medium
+
+  * New upstream version 0.0~git20250222.34a9a0b+ds
+  * Upgrade Debian policy standards to 4.7.1
+  * Rediff patches
+
+ -- YOKOTA Hiroshi <yokota.hgml@gmail.com>  Sun, 23 Feb 2025 02:54:15 +0900
+
+asmc-linux (0.0~git20250115.1606b4a+ds-1) unstable; urgency=medium
+
+  * New upstream version 0.0~git20250115.1606b4a+ds
+  * From this version, upstream source tarball is repack into Debian source
+    tarball because of these reasons.
+    - Drop document file in CHM format:
+      Document file from upstream tarball is written with CHM (Microsoft
+      Compiled HTML Help). Debian dose not want these pre-built binary blobs
+      for source code.
+      See also Lintian document "source-contains-prebuilt-ms-help-file":
+      https://lintian.debian.org/tags/source-contains-prebuilt-ms-help-file
+  * Update man page from CHM file
+  * Add copyright source
+  * Update copyright text from license.txt
+  * No need to forward Debian specific patch
+
+ -- YOKOTA Hiroshi <yokota.hgml@gmail.com>  Tue, 11 Feb 2025 11:25:10 +0900
+
+asmc-linux (0.0~git20250109.a834602-1) unstable; urgency=medium
+
+  * Initialize asmc-linux package (Closes: #1091341)
+
+ -- YOKOTA Hiroshi <yokota.hgml@gmail.com>  Fri, 10 Jan 2025 16:32:22 +0900

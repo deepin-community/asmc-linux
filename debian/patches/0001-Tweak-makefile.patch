@@ -1,0 +1,53 @@
+From: YOKOTA Hiroshi <yokota.hgml@gmail.com>
+Date: Mon, 23 Dec 2024 22:12:09 +0900
+Subject: Tweak makefile
+
+Forwarded: not-needed
+
+* Sort input files to deterministic build
+* Use Debian specific build flags
+---
+ makefile | 26 ++++++++++++++------------
+ 1 file changed, 14 insertions(+), 12 deletions(-)
+
+diff --git a/makefile b/makefile
+index fd5fe84..5971656 100644
+--- a/makefile
++++ b/makefile
+@@ -1,22 +1,24 @@
++# -*- mode: makefile-gmake -*-
+ #
+ # Makefile for Asmc
+ #
+ 
+-.PHONY: asmc
++.PHONY: all clean distclean
+ 
+-all: asmc clean
++SRCS = $(sort $(wildcard src/*.s))
++OBJS = $(SRCS:.s=.o)
++TARGET = asmc
+ 
+-asmc:
+-	gcc -c src/*.s && gcc -Wl,-pie,-z,now,-z,noexecstack -s -o $@ *.o
++all: $(TARGET)
+ 
+-clean:
+-	rm -f *.o
++%.o: %.s
++	$(CC) $(CPPFLAGS) $(CFLAGS) $(ASFLAGS) -c -o $@ $<
+ 
+-distclean:
+-	rm -f *.o asmc
++$(TARGET): $(OBJS)
++	$(CC) $(LDFLAGS) -Wl,-pie,-z,now,-z,noexecstack -o $@ $^
+ 
+-install:
+-	sudo install ./asmc /usr/bin
++clean:
++	$(RM) $(OBJS)
+ 
+-uninstall:
+-	sudo rm -f /usr/bin/asmc
++distclean: clean
++	$(RM) $(TARGET)
